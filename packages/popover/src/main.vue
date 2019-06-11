@@ -15,7 +15,12 @@
         :aria-hidden="(disabled || !showPopper) ? 'true' : 'false'"
       >
         <div class="el-popover__title" v-if="title" v-text="title"></div>
-        <slot>{{ content }}</slot>
+        <template
+          v-if="showPopover || keepContent">
+          <slot>
+            {{ content }}
+          </slot>
+        </template>
       </div>
     </transition>
     <slot name="reference"></slot>
@@ -41,6 +46,10 @@ export default {
     openDelay: {
       type: Number,
       default: 0
+    },
+    keepContent: {
+      type: Boolean,
+      default: true
     },
     title: String,
     disabled: Boolean,
