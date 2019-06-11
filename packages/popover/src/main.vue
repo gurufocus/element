@@ -8,7 +8,7 @@
         class="el-popover el-popper"
         :class="[popperClass, content && 'el-popover--plain']"
         ref="popper"
-        v-if="keepContent !== false || showPopover"
+        v-if="keepContent !== false || showPopper"
         v-show="!disabled && showPopper"
         :style="{ width: width + 'px' }"
         role="tooltip"
