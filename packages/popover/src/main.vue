@@ -8,16 +8,17 @@
         class="el-popover el-popper"
         :class="[popperClass, content && 'el-popover--plain']"
         ref="popper"
-        v-if="keepContent !== false || showPopper"
         v-show="!disabled && showPopper"
         :style="{ width: width + 'px' }"
         role="tooltip"
         :id="tooltipId"
         :aria-hidden="(disabled || !showPopper) ? 'true' : 'false'">
         <div class="el-popover__title" v-if="title" v-text="title"/>
-        <slot>
-          {{ content }}
-        </slot>
+        <template v-if="keepContent !== false || showPopper">
+          <slot>
+            {{ content }}
+          </slot>
+        </template>
       </div>
     </transition>
     <slot name="reference"></slot>
