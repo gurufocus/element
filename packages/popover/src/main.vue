@@ -16,7 +16,7 @@
       >
         <div class="el-popover__title" v-if="title" v-text="title"></div>
         <template
-          v-if="showPopover || keepContent">
+          v-if="showPopover || keepContent !== false">
           <slot>
             {{ content }}
           </slot>
@@ -49,7 +49,7 @@ export default {
     },
     keepContent: {
       type: Boolean,
-      default: true
+      default: false
     },
     title: String,
     disabled: Boolean,
