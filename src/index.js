@@ -76,6 +76,7 @@ import Divider from '../packages/divider/index.js';
 import Image from '../packages/image/index.js';
 import Calendar from '../packages/calendar/index.js';
 import Drawer from '../packages/drawer/index.js';
+import Avatar from '../packages/avatar/index.js';
 import locale from 'element-ui/src/locale';
 import CollapseTransition from 'element-ui/src/transitions/collapse-transition';
 
@@ -152,6 +153,7 @@ const components = [
   Image,
   Calendar,
   Drawer,
+  Avatar,
   CollapseTransition
 ];
 
@@ -266,5 +268,6 @@ export default {
   Divider,
   Image,
   Calendar,
-  Drawer
+  Drawer,
+  Avatar
 };

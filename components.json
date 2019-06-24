@@ -74,5 +74,6 @@
   "divider": "./packages/divider/index.js",
   "image": "./packages/image/index.js",
   "calendar": "./packages/calendar/index.js",
-  "drawer": "./packages/drawer/index.js"
+  "drawer": "./packages/drawer/index.js",
+  "avatar": "./packages/avatar/index.js"
 }

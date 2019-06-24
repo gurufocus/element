@@ -73,6 +73,7 @@ import { ElDivider } from './divider'
 import { ElCalendar } from './calendar'
 import { ElImage } from './image'
 import { ElDrawer } from './drawer'
+import { ElAvatar } from './avatar'
 
 export interface InstallationOptions {
   locale: any,
