@@ -72,6 +72,7 @@ import { ElUpload } from './upload'
 import { ElDivider } from './divider'
 import { ElCalendar } from './calendar'
 import { ElImage } from './image'
+import { ElDrawer } from './drawer'
 
 export interface InstallationOptions {
   locale: any,
@@ -306,3 +307,30 @@ export class Upload extends ElUpload {}
 
 /** Divider Component */
 export class Divider extends ElDivider {}
+
+/** Link Component */
+export class Link extends ElLink {}
+
+/** Image Component */
+export class Image extends ElImage {}
+
+/** Icon Component */
+export class Icon extends ElIcon {}
+
+/** Calendar Component */
+export class Calendar extends ElCalendar {}
+
+/** Backtop Component */
+export class Backtop extends ElBacktop {}
+
+/** InfiniteScroll Directive */
+export const InfiniteScroll: PluginObject<ElInfiniteScroll>;
+
+/** PageHeader Component */
+export class PageHeader extends ElPageHeader {}
+
+/** Avatar Component */
+export class Avatar extends ElAvatar {}
+
+/** Drawer Component */
+export class Drawer extends ElDrawer {}
