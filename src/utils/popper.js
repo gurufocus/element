@@ -632,11 +632,13 @@
         var left = Math.round(data.offsets.popper.left);
         var top = Math.round(data.offsets.popper.top);
 
+        console.log(data.offsets.popper.left)
+        console.log(left)
+
         // if gpuAcceleration is set to true and transform is supported, we use `translate3d` to apply the position to the popper
         // we automatically use the supported prefixed version if needed
         var prefixedProperty;
         if (this._options.gpuAcceleration && (prefixedProperty = getSupportedPropertyName('transform'))) {
-            console.log('== if ==')
             styles[prefixedProperty] = 'translate3d(' + left + 'px, ' + top + 'px, 0)';
             styles.top = 0;
             styles.left = 0;
@@ -724,10 +726,6 @@
         var check = {
             left: function() {
                 var left = popper.left;
-                console.log('popper left')
-                console.log(popper.left)
-                console.log('boundaries.left')
-                console.log(data.boundaries.left)
                 if (popper.left < data.boundaries.left) {
                     left = Math.max(popper.left, data.boundaries.left);
                 }
