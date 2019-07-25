@@ -416,6 +416,8 @@
         // Compute offsets of popper
         //
 
+        console.log('== 419 ==')
+
         // depending by the popper placement we have to compute its offsets slightly differently
         if (['right', 'left'].indexOf(placement) !== -1) {
             popperOffsets.top = referenceOffsets.top + referenceOffsets.height / 2 - popperRect.height / 2;
@@ -526,6 +528,8 @@
             var scrollTop = data.offsets.popper.position === 'fixed' ? 0 : getScrollTopValue(scrollParent);
             var scrollLeft = data.offsets.popper.position === 'fixed' ? 0 : getScrollLeftValue(scrollParent);
 
+            console.log("== 539 ==")
+
             boundaries = {
                 top: 0 - (offsetParentRect.top - scrollTop),
                 right: root.document.documentElement.clientWidth - (offsetParentRect.left - scrollLeft),
@@ -544,6 +548,9 @@
                 boundaries = getOffsetRect(boundariesElement);
             }
         }
+
+        console.log("== 560 ==")
+
         boundaries.left += padding;
         boundaries.right -= padding;
         boundaries.top = boundaries.top + padding;
@@ -617,6 +624,8 @@
             position: data.offsets.popper.position
         };
 
+        console.log("== 635 ==")
+
         // round top and left to avoid blurry text
         var left = Math.round(data.offsets.popper.left);
         var top = Math.round(data.offsets.popper.top);
@@ -666,7 +675,7 @@
         var placement = data.placement;
         var basePlacement = placement.split('-')[0];
         var shiftVariation = placement.split('-')[1];
-
+        console.log("== 686 ==")
         // if shift shiftVariation is specified, run the modifier
         if (shiftVariation) {
             var reference = data.offsets.reference;
@@ -702,6 +711,8 @@
     Popper.prototype.modifiers.preventOverflow = function(data) {
         var order = this._options.preventOverflowOrder;
         var popper = getPopperClientRect(data.offsets.popper);
+
+        console.log('== 723 ==')
 
         var check = {
             left: function() {
@@ -752,6 +763,8 @@
         var popper  = getPopperClientRect(data.offsets.popper);
         var reference = data.offsets.reference;
         var f = Math.floor;
+
+        console.log('== 775 ==')
 
         if (popper.right < f(reference.left)) {
             data.offsets.popper.left = f(reference.left) - popper.width;
@@ -847,6 +860,9 @@
      * @returns {Object} The data object, properly modified
      */
     Popper.prototype.modifiers.offset = function(data) {
+        
+        console.log('== 872 ==')
+
         var offset = this._options.offset;
         var popper  = data.offsets.popper;
 
@@ -978,6 +994,8 @@
      * @returns {String} flipped placement
      */
     function getOppositePlacement(placement) {
+        console.log('== 1005 ==')
+
         var hash = {left: 'right', right: 'left', bottom: 'top', top: 'bottom' };
         return placement.replace(/left|right|bottom|top/g, function(matched){
             return hash[matched];
@@ -1140,6 +1158,9 @@
      * @return {Object} position - Coordinates of the element and its `scrollTop`
      */
     function getOffsetRect(element) {
+        
+        console.log('== 1170 ==')
+
         var elementRect = {
             width: element.offsetWidth,
             height: element.offsetHeight,
@@ -1172,6 +1193,8 @@
             ? -element.scrollTop
             : rect.top;
 
+        console.log('== 1204 ==')
+
         return {
             left: rect.left,
             top: rectTop,
@@ -1193,6 +1216,8 @@
     function getOffsetRectRelativeToCustomParent(element, parent, fixed) {
         var elementRect = getBoundingClientRect(element);
         var parentRect = getBoundingClientRect(parent);
+
+        console.log('== 1228 ==')
 
         if (fixed) {
             var scrollParent = getScrollParent(parent);
