@@ -724,6 +724,10 @@
         var check = {
             left: function() {
                 var left = popper.left;
+                console.log('popper left')
+                console.log(popper.left)
+                console.log('boundaries.left')
+                console.log(data.boundaries.left)
                 if (popper.left < data.boundaries.left) {
                     left = Math.max(popper.left, data.boundaries.left);
                 }
@@ -751,8 +755,6 @@
                 return { top: top };
             }
         };
-
-        console.log(check)
 
         order.forEach(function(direction) {
             data.offsets.popper = Object.assign(popper, check[direction]());
