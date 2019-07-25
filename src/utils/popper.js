@@ -415,9 +415,6 @@
         //
         // Compute offsets of popper
         //
-
-        console.log('== 419 ==')
-
         // depending by the popper placement we have to compute its offsets slightly differently
         if (['right', 'left'].indexOf(placement) !== -1) {
             popperOffsets.top = referenceOffsets.top + referenceOffsets.height / 2 - popperRect.height / 2;
@@ -434,9 +431,6 @@
                 popperOffsets.top = referenceOffsets.bottom;
             }
         }
-
-        console.log(popperOffsets)
-
         // Add width and height to our offsets object
         popperOffsets.width   = popperRect.width;
         popperOffsets.height  = popperRect.height;
@@ -548,15 +542,10 @@
                 boundaries = getOffsetRect(boundariesElement);
             }
         }
-
-        console.log("== 560 ==")
-
         boundaries.left += padding;
         boundaries.right -= padding;
         boundaries.top = boundaries.top + padding;
         boundaries.bottom = boundaries.bottom - padding;
-
-        console.log(boundaries)
         return boundaries;
     };
 
@@ -626,14 +615,18 @@
             position: data.offsets.popper.position
         };
 
-        console.log("== 635 ==")
+        var clientWidth = document.body.clientWidth
 
         // round top and left to avoid blurry text
         var left = Math.round(data.offsets.popper.left);
         var top = Math.round(data.offsets.popper.top);
+        var width = data.offsets.popper.width
 
-        console.log(data.offsets.popper.left)
-        console.log(left)
+        if (left < 0) {
+            left = 0
+        } else if (left + width > clientWidth) {
+            left = clientWidth - width
+        }
 
         // if gpuAcceleration is set to true and transform is supported, we use `translate3d` to apply the position to the popper
         // we automatically use the supported prefixed version if needed
@@ -645,7 +638,6 @@
         }
         // othwerise, we use the standard `left` and `top` properties
         else {
-            console.log('== else ==')
             styles.left =left;
             styles.top = top;
         }
@@ -657,8 +649,6 @@
         Object.assign(styles, data.styles);
 
         setStyle(this._popper, styles);
-
-        console.log(styles)
 
         // set an attribute which will be useful to style the tooltip (use it to properly position its arrow)
         // NOTE: 1 DOM access here
@@ -683,7 +673,6 @@
         var placement = data.placement;
         var basePlacement = placement.split('-')[0];
         var shiftVariation = placement.split('-')[1];
-        console.log("== 686 ==")
         // if shift shiftVariation is specified, run the modifier
         if (shiftVariation) {
             var reference = data.offsets.reference;
@@ -704,8 +693,6 @@
 
             data.offsets.popper = Object.assign(popper, shiftOffsets[axis][shiftVariation]);
         }
-        console.log(shiftVariation)
-
         return data;
     };
 
@@ -720,9 +707,6 @@
     Popper.prototype.modifiers.preventOverflow = function(data) {
         var order = this._options.preventOverflowOrder;
         var popper = getPopperClientRect(data.offsets.popper);
-
-        console.log('== 723 ==')
-
         var check = {
             left: function() {
                 var left = popper.left;
@@ -772,9 +756,6 @@
         var popper  = getPopperClientRect(data.offsets.popper);
         var reference = data.offsets.reference;
         var f = Math.floor;
-
-        console.log('== 775 ==')
-
         if (popper.right < f(reference.left)) {
             data.offsets.popper.left = f(reference.left) - popper.width;
         }
@@ -787,9 +768,6 @@
         if (popper.top > f(reference.bottom)) {
             data.offsets.popper.top = f(reference.bottom);
         }
-
-        console.log(popper)
-
         return data;
     };
 
@@ -871,9 +849,6 @@
      * @returns {Object} The data object, properly modified
      */
     Popper.prototype.modifiers.offset = function(data) {
-        
-        console.log('== 872 ==')
-
         var offset = this._options.offset;
         var popper  = data.offsets.popper;
 
@@ -889,8 +864,6 @@
         else if (data.placement.indexOf('bottom') !== -1) {
             popper.left += offset;
         }
-        console.log(popper)
-
         return data;
     };
 
@@ -1169,9 +1142,6 @@
      * @return {Object} position - Coordinates of the element and its `scrollTop`
      */
     function getOffsetRect(element) {
-        
-        console.log('== 1170 ==')
-
         var elementRect = {
             width: element.offsetWidth,
             height: element.offsetHeight,
@@ -1181,9 +1151,6 @@
 
         elementRect.right = elementRect.left + elementRect.width;
         elementRect.bottom = elementRect.top + elementRect.height;
-
-        console.log(elementRect)
-
         // position
         return elementRect;
     }
@@ -1205,10 +1172,6 @@
         var rectTop = isIE && element.tagName === 'HTML'
             ? -element.scrollTop
             : rect.top;
-
-        console.log('== 1204 ==')
-        console.log(rect)
-
         return {
             left: rect.left,
             top: rectTop,
@@ -1230,9 +1193,6 @@
     function getOffsetRectRelativeToCustomParent(element, parent, fixed) {
         var elementRect = getBoundingClientRect(element);
         var parentRect = getBoundingClientRect(parent);
-
-        console.log('== 1228 ==')
-
         if (fixed) {
             var scrollParent = getScrollParent(parent);
             parentRect.top += scrollParent.scrollTop;
@@ -1249,8 +1209,6 @@
             width: elementRect.width,
             height: elementRect.height
         };
-
-        console.log(rect)
         return rect;
     }
 
