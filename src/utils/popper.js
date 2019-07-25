@@ -435,6 +435,8 @@
             }
         }
 
+        console.log(popperOffsets)
+
         // Add width and height to our offsets object
         popperOffsets.width   = popperRect.width;
         popperOffsets.height  = popperRect.height;
@@ -528,8 +530,6 @@
             var scrollTop = data.offsets.popper.position === 'fixed' ? 0 : getScrollTopValue(scrollParent);
             var scrollLeft = data.offsets.popper.position === 'fixed' ? 0 : getScrollLeftValue(scrollParent);
 
-            console.log("== 539 ==")
-
             boundaries = {
                 top: 0 - (offsetParentRect.top - scrollTop),
                 right: root.document.documentElement.clientWidth - (offsetParentRect.left - scrollLeft),
@@ -555,6 +555,8 @@
         boundaries.right -= padding;
         boundaries.top = boundaries.top + padding;
         boundaries.bottom = boundaries.bottom - padding;
+
+        console.log(boundaries)
         return boundaries;
     };
 
@@ -652,6 +654,8 @@
 
         setStyle(this._popper, styles);
 
+        console.log(styles)
+
         // set an attribute which will be useful to style the tooltip (use it to properly position its arrow)
         // NOTE: 1 DOM access here
         this._popper.setAttribute('x-placement', data.placement);
@@ -696,6 +700,7 @@
 
             data.offsets.popper = Object.assign(popper, shiftOffsets[axis][shiftVariation]);
         }
+        console.log(shiftVariation)
 
         return data;
     };
@@ -745,6 +750,8 @@
             }
         };
 
+        console.log(check)
+
         order.forEach(function(direction) {
             data.offsets.popper = Object.assign(popper, check[direction]());
         });
@@ -778,6 +785,8 @@
         if (popper.top > f(reference.bottom)) {
             data.offsets.popper.top = f(reference.bottom);
         }
+
+        console.log(popper)
 
         return data;
     };
@@ -878,6 +887,8 @@
         else if (data.placement.indexOf('bottom') !== -1) {
             popper.left += offset;
         }
+        console.log(popper)
+
         return data;
     };
 
@@ -994,8 +1005,6 @@
      * @returns {String} flipped placement
      */
     function getOppositePlacement(placement) {
-        console.log('== 1005 ==')
-
         var hash = {left: 'right', right: 'left', bottom: 'top', top: 'bottom' };
         return placement.replace(/left|right|bottom|top/g, function(matched){
             return hash[matched];
@@ -1171,6 +1180,8 @@
         elementRect.right = elementRect.left + elementRect.width;
         elementRect.bottom = elementRect.top + elementRect.height;
 
+        console.log(elementRect)
+
         // position
         return elementRect;
     }
@@ -1194,6 +1205,7 @@
             : rect.top;
 
         console.log('== 1204 ==')
+        console.log(rect)
 
         return {
             left: rect.left,
@@ -1235,6 +1247,8 @@
             width: elementRect.width,
             height: elementRect.height
         };
+
+        console.log(rect)
         return rect;
     }
 
