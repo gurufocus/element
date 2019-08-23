@@ -1,5 +1,5 @@
 {
-  "name": "gf-element-ui",
+  "name": "element-ui",
   "version": "2.8.3",
   "description": "A Component Library for Vue.js.",
   "main": "lib/element-ui.common.js",
