@@ -50,7 +50,37 @@ Callout a temporary drawer, from multiple direction
 ```
 :::
 
-### Customization Content
+### No Title
+
+When you no longer need a title, you can remove title from drawer.
+
+:::demo Set the `withHeader` attribute to **false**, you can remove the title from drawer, thus your drawer can have more space on screen. If you want to be accessible, make sure to set the `title` attribute.
+
+```html
+<el-button @click="drawer = true" type="primary" style="margin-left: 16px;">
+  open
+</el-button>
+
+<el-drawer
+  title="I am the title"
+  :visible.sync="drawer"
+  :with-header="false">
+  <span>Hi there!</span>
+</el-drawer>
+
+<script>
+  export default {
+    data() {
+      return {
+        drawer: false,
+      };
+    }
+  };
+</script>
+```
+:::
+
+### Personalizar el contenido
 
 Like `Dialog`, `Drawer` can do many diverse interaction as you wanted.
 
@@ -92,7 +122,7 @@ Like `Dialog`, `Drawer` can do many diverse interaction as you wanted.
       </el-form-item>
     </el-form>
     <div class="demo-drawer__footer">
-      <el-button @click="dialog = false">Cancel</el-button>
+      <el-button @click="cancelForm">Cancel</el-button>
       <el-button type="primary" @click="$refs.drawer.closeDrawer()" :loading="loading">{{ loading ? 'Submitting ...' : 'Submit' }}</el-button>
     </div>
   </div>
@@ -132,20 +162,32 @@ export default {
         resource: '',
         desc: ''
       },
-      formLabelWidth: '80px'
+      formLabelWidth: '80px',
+      timer: null,
     };
   },
   methods: {
     handleClose(done) {
+      if (this.loading) {
+        return;
+      }
       this.$confirm('Do you want to submit?')
         .then(_ => {
           this.loading = true;
-          setTimeout(() => {
-            this.loading = false;
+          this.timer = setTimeout(() => {
             done();
+            // animation takes time
+            setTimeout(() => {
+              this.loading = false;
+            }, 400);
           }, 2000);
         })
         .catch(_ => {});
+    },
+    cancelForm() {
+      this.loading = false;
+      this.dialog = false;
+      clearTimeout(this.timer);
     }
   }
 }
@@ -225,23 +267,24 @@ If the variable bound to `visible` is managed in Vuex store, the `.sync` can not
 
 | Parameter| Description | Type      | Acceptable Values                           | Defaults  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| append-to-body | Controls should Drawer be inserted to DocumentBody Element, nested Drawer must assign this param to **true**| boolean   | — | false |
-| before-close | If set, closing procedure will be halted | function(done), done is function type that accepts a boolean as parameter, calling done with true or without parameter will abort the close procedure | — | — |
-| close-on-press-escape | Indicates whether Drawer can be closed by pressing ESC | boolean | — | true |
-| custom-class | Extra class names for Drawer | string | — | — |
-| destroy-on-close | Indicates whether children should be destroyed after Drawer closed | boolean | - | false |
-| modal | Should show shadowing layer | boolean | — | true |
-| modal-append-to-body | Indicates should shadowing layer be insert into DocumentBody element | boolean   | — | true |
-| direction | Drawer's opening direction | Direction | rtl / ltr / ttb / tbb | rtl |
-| show-close | Should show close button at the top right of Drawer | boolean | — | true |
-| size | Drawer's size, if Drawer is horizontal mode, it effects the width property, otherwise it effects the height property, when size is `number` type, it describes the size by unit of pixels; when size is `string` type, it should be used with `x%` notation, other wise it will be interpreted to pixel unit | number / string | - | '30%' |
-| title | Drawer's title, can also be set by named slot, detailed descriptions can be found in the slot form | string | — | — |
-| visible | Should Drawer be displayed, also support the `.sync` notation | boolean | — | false |
-| wrapperClosable | Indicates whether user can close Drawer by clicking the shadowing layer. | boolean | - | true |
+| append-to-body | Los controles deberían insertar Drawer en el elemento DocumentBody, los Drawer anidados deben asignar este parámetro a **true** | boolean   | — | false |
+| before-close | Si está configurado, el procedimiento de cierre se detendrá. | function(done), done es un tipo de función que acepta un booleano como parámetro, una llamada hecha con true o sin parámetro abortará el procedimiento de cierre. | — | — |
+| close-on-press-escape | Indica si el Drawer puede cerrarse pulsando ESC | boolean | — | true |
+| custom-class | Nombre extra de clase para  Drawer | string | — | — |
+| destroy-on-close | Indica si los children deben ser destruidos después de cerrar el Drawer. | boolean | - | false |
+| modal | Mostrará una capa de sombra | boolean | — | true |
+| modal-append-to-body | Indica si se debe insertar una capa de sombreado en el elemento DocumentBody | boolean   | — | true |
+| direction | Dirección de apertura del Drawer | Direction | rtl / ltr / ttb / btt | rtl |
+| show-close | Se mostrará el botón de cerrar en la parte superior derecha del Drawer | boolean | — | true |
+| size | Tamaño del Drawer. Si el Drawer está en modo horizontal, afecta a la propiedad width, de lo contrario afecta a la propiedad height, cuando el tamaño es tipo `number`, describe el tamaño por unidad de píxeles; cuando el tamaño es tipo `string`, se debe usar con notación `x%`, de lo contrario se interpretará como unidad de píxeles. | number / string | - | '30%' |
+| title | El título del Drawer, también se puede establecer por slot con nombre, las descripciones detalladas se pueden encontrar en el formulario de slot. | string | — | — |
+| visible | Si se muestra el Drawer, también soporta la notación `.sync` | boolean | — | false |
+| wrapperClosable | Indica si el usuario puede cerrar el Drawer haciendo clic en la capa de sombreado. | boolean | - | true |
+| withHeader | Flag that controls the header section's existance, default to true, when withHeader set to false, both `title attribute` and `title slot` won't work | boolean | - | true |
 
-### Drawer Slot
+### Drawer Slot's
 
-| Name | Description |
+| Nombre | Descripción |
 |------|--------|
 | — | Drawer's Content |
 | title | Drawer Title Section |
