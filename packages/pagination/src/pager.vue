@@ -3,7 +3,9 @@
     <li
       :class="{ active: currentPage === 1, disabled }"
       v-if="pageCount > 0"
-      class="number">1</li>
+      class="number">
+        <router-link :to="paginateObject(1)">1 test</router-link>
+      </li>
     <li
       class="el-icon more btn-quickprev"
       :class="[quickprevIconClass, { disabled }]"
@@ -41,7 +43,9 @@
 
       pagerCount: Number,
 
-      disabled: Boolean
+      disabled: Boolean,
+
+      link: Boolean
     },
 
     watch: {
@@ -96,6 +100,15 @@
           this.quickprevIconClass = 'el-icon-d-arrow-left';
         } else {
           this.quicknextIconClass = 'el-icon-d-arrow-right';
+        }
+      },
+
+      paginateObject (pageTo) {
+        return {
+          query: {
+            ...this.$route.query,
+            ['page']: pageTo,
+          },
         }
       }
     },

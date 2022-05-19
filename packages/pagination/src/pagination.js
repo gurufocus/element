@@ -54,7 +54,9 @@ export default {
 
     disabled: Boolean,
 
-    hideOnSinglePage: Boolean
+    hideOnSinglePage: Boolean,
+
+    link: { type: Boolean, default: false }
   },
 
   data() {
@@ -78,7 +80,7 @@ export default {
     const TEMPLATE_MAP = {
       prev: <prev></prev>,
       jumper: <jumper></jumper>,
-      pager: <pager currentPage={ this.internalCurrentPage } pageCount={ this.internalPageCount } pagerCount={ this.pagerCount } on-change={ this.handleCurrentChange } disabled={ this.disabled }></pager>,
+      pager: <pager currentPage={ this.internalCurrentPage } pageCount={ this.internalPageCount } pagerCount={ this.pagerCount } on-change={ this.handleCurrentChange } disabled={ this.disabled } link={ this.link }></pager>,
       next: <next></next>,
       sizes: <sizes pageSizes={ this.pageSizes }></sizes>,
       slot: <slot>{ this.$slots.default ? this.$slots.default : '' }</slot>,
